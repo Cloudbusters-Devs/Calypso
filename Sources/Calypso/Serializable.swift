@@ -17,7 +17,7 @@ public protocol Serializable {
     func disassembleDic() -> (keyPairArrays)
 }
 
-extension Serializable {
+public extension Serializable {
     func toDictionary() -> [String:Any] {
         var dict:[String:Any] = [:]
 

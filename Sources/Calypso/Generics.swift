@@ -17,34 +17,34 @@
 import Foundation
 import CloudKit
 
-class Generics {
+public class Generics {
 
-    static func new(n : TrueGeneric) -> GNumber<Double> {
+    public static func new(n : TrueGeneric) -> GNumber<Double> {
         return GNumber(n.__repr__() as! Double)
     }
     
-    static func new(b : TrueGeneric) -> GBoolean<Bool> {
+    public static func new(b : TrueGeneric) -> GBoolean<Bool> {
         return GBoolean(b.__bool__() as! Bool)
     }
     
-    static func new(s : TrueGeneric) -> GString<String> {
+    public static func new(s : TrueGeneric) -> GString<String> {
         return GString(s.__str__() as! String)
     }
     
-    static func new() -> Obj<Double> {
+    public static func new() -> Obj<Double> {
         return Obj()
     }
     
-    static func new<T: TrueGeneric, O: TrueGeneric>(i: T, o: O.Type) -> Obj<O> {
+    public static func new<T: TrueGeneric, O: TrueGeneric>(i: T, o: O.Type) -> Obj<O> {
         let newI = i.__to__(t: O.self) as! O
         return Obj(newI)
     }
     
-    static func newObjectFromRecord(r: CKRecord) -> Obj<String> {
+    public static func newObjectFromRecord(r: CKRecord) -> Obj<String> {
         return Obj.make(r)
     }
 
-    class GNumber<T : TrueGeneric> : Obj<T> {
+    public class GNumber<T : TrueGeneric> : Obj<T> {
 
         static func NAN() -> GNumber {
             return GNumber.init()
@@ -59,7 +59,7 @@ class Generics {
         }
     }
     
-    class GBoolean<T: TrueGeneric> : Obj<T> {
+    public class GBoolean<T: TrueGeneric> : Obj<T> {
         
         override class func make(from: T) -> GBoolean {
             return GBoolean(from)
@@ -70,7 +70,7 @@ class Generics {
         }
     }
     
-    class GString<T: TrueGeneric> : Obj<T> {
+    public class GString<T: TrueGeneric> : Obj<T> {
         
         override class func make(from: T) -> GString {
             return GString(from)
@@ -81,13 +81,13 @@ class Generics {
         }
     }
     
-    class Obj<T : TrueGeneric> : TrueGeneric {
+    public class Obj<T : TrueGeneric> : TrueGeneric {
         
-        func __typ__() -> TrueGeneric.Type {
+        public func __typ__() -> TrueGeneric.Type {
             return type(of: self)
         }
         
-        func __to__(t: TrueGeneric.Type) -> TrueGeneric {
+        public func __to__(t: TrueGeneric.Type) -> TrueGeneric {
             return self
         }
         
@@ -101,19 +101,19 @@ class Generics {
             self.value = v
         }
         
-        func __bool__() -> TrueGeneric {
+        public func __bool__() -> TrueGeneric {
             return self.value.__bool__()
         }
         
-        func __str__() -> TrueGeneric {
+        public func __str__() -> TrueGeneric {
             return self.value.__str__()
         }
         
-        func __repr__() -> TrueGeneric {
+        public func __repr__() -> TrueGeneric {
             return self.value.__repr__()
         }
         
-        static func __default__() -> TrueGeneric {
+        public static func __default__() -> TrueGeneric {
             return T.__default__()
         }
         
