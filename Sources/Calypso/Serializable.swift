@@ -50,7 +50,6 @@ public extension Serializable {
         
         dict.forEach { sArray.append($0.key)   }
         dict.forEach { aArray.append($0.value) }
-        
         return (sArray, aArray)
     }
 }
